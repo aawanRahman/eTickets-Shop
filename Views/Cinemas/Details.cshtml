@@ -1,0 +1,52 @@
+﻿@model Cinema
+
+@{
+    ViewData["Title"] = "Details of Cinema";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Details for @Model.CinemaName</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                    <div class="form-group text-center">
+                        <img class="border-info rounded-circle" style="max-width: 150px" id="ProfilePicturePreview" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CinemaImageUrl" class="control-label"></label>
+                        <input asp-for="CinemaImageUrl" class="form-control" readonly />
+                        <span asp-validation-for="CinemaImageUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CinemaName" class="control-label"></label>
+                        <input asp-for="CinemaName" class="form-control" readonly />
+                        <span asp-validation-for="CinemaName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CinemaDescription" class="control-label"></label>
+                        <input asp-for="CinemaDescription" class="form-control" readonly />
+                        <span asp-validation-for="CinemaDescription" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        }
+                            <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#CinemaImageUrl").val();
+        })
+    </script>
+}

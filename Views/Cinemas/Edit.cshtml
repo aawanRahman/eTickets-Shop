@@ -1,0 +1,59 @@
+﻿@model Cinema
+
+@{
+    ViewData["Title"] = "Edit Cinema Information";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Edit @Model.CinemaName Information</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group text-center">
+                        <img id="ProfilePicturePreview"  class="border-info rounded-circle" style="max-width: 150px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CinemaImageUrl" class="control-label"></label>
+                        <input asp-for="CinemaImageUrl" class="form-control" contenteditable="true"/>
+                        <span asp-validation-for="CinemaImageUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CinemaName" class="control-label"></label>
+                        <input asp-for="CinemaName" class="form-control" contenteditable="true"/>
+                        <span asp-validation-for="CinemaName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CinemaDescription" class="control-label"></label>
+                        <input asp-for="CinemaDescription" class="form-control" contenteditable="true"/>
+                        <span asp-validation-for="CinemaDescription" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#CinemaImageUrl").val();
+        })
+
+        $("#CinemaImageUrl").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
